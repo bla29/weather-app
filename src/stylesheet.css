@@ -13,6 +13,13 @@
     font-size: 125px;
 }
 
+.nailong {
+    align-self: center;
+    text-align: center;
+    width: 125px;
+    height: 125px;
+}
+
 .forecast-container {
     display: grid;
     grid-template-columns: 1fr;
@@ -22,6 +29,6 @@
 .forecast-item {
     border: 1px solid black;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
     background-color: bisque;
 }
