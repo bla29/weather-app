@@ -7,9 +7,14 @@
     margin: 15px;
 }
 
+.weather-icon {
+    align-self: center;
+    text-align: center;
+}
+
 .forecast-container {
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 3fr;
     gap: 15px;
 }
 

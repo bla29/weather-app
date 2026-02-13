@@ -1,4 +1,5 @@
 import './stylesheet.css'
+import './weather-icons.min.css'
 
 async function fetchWeatherData(location) {
     try {
@@ -22,6 +23,28 @@ function parseWeatherData(weatherData) {
     })
 }
 
+function createIcon(condition) {
+    let icon = document.createElement('i');
+    icon.classList.add('wi');
+
+    switch (condition) {
+        case 'partly-cloudy-day':
+            icon.classList.add('wi-day-cloudy');
+        case 'rain':
+            icon.classList.add('wi-rain-wind');
+        case 'clear-day':
+            icon.classList.add('wi-day-sunny');
+        case 'snow':
+            icon.classList.add('wi-day-snow');
+        case 'cloudy':
+            icon.classList.add('wi-cloudy');
+        default:
+            icon.classList.add('wi-cloud');
+    }
+    icon.classList.add('weather-icon');
+    return icon;
+}
+
 let formButton = document.querySelector('#submit-button');
 let formField = document.querySelector('#location');
 
@@ -32,8 +55,10 @@ formButton.addEventListener('click', () => {
     let location = String(formField.value);
     fetchWeatherData(location).then((data) => {
         parseWeatherData(data).then((parsedData) => {
-            console.log(parsedData)
             for (let day of parsedData.days) {
+                console.log(day)
+                let forecastIcon = createIcon(day.icon);
+
                 let forecastDay = document.createElement('div');
                 forecastDay.classList.add('forecast-item');
 
@@ -54,6 +79,7 @@ formButton.addEventListener('click', () => {
                 forecastDay.appendChild(tempMin);
                 forecastDay.appendChild(temp);
 
+                forecastContainer.appendChild(forecastIcon);
                 forecastContainer.appendChild(forecastDay);
             }
             document.body.appendChild(forecastContainer);
