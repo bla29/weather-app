@@ -53,6 +53,7 @@ forecastContainer.classList.add('forecast-container');
 
 formButton.addEventListener('click', () => {
     let location = String(formField.value);
+    forecastContainer.innerHTML = '';
     fetchWeatherData(location).then((data) => {
         parseWeatherData(data).then((parsedData) => {
             for (let day of parsedData.days) {
@@ -60,7 +61,6 @@ formButton.addEventListener('click', () => {
                 let forecastIcon = createIcon(day.icon);
 
                 let forecastDay = document.createElement('div');
-                forecastDay.classList.add('forecast-item');
 
                 let date = document.createElement('h2');
                 date.textContent = 'Date: ' + day.datetime;
@@ -79,8 +79,12 @@ formButton.addEventListener('click', () => {
                 forecastDay.appendChild(tempMin);
                 forecastDay.appendChild(temp);
 
-                forecastContainer.appendChild(forecastIcon);
-                forecastContainer.appendChild(forecastDay);
+                let forecastItem = document.createElement('div');
+                forecastItem.classList.add('forecast-item');
+
+                forecastItem.appendChild(forecastIcon);
+                forecastItem.appendChild(forecastDay);
+                forecastContainer.appendChild(forecastItem);
             }
             document.body.appendChild(forecastContainer);
         })
